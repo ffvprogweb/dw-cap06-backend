@@ -24,7 +24,7 @@ public class ProdutoServico implements IProdutoServico {
 
 	@Override
 	public List<Catalogo> consultaCatalogo() {
-		logger.info(">>>>>> servico consulta catalogo iniciado");
+		logger.info(">>>>>> produto servico consulta catalogo iniciado");
 		Catalogo c = null;
 		List<Catalogo> lista = new ArrayList<Catalogo>();
 		List<Produto> listaP = repositoryP.findAll();
