@@ -26,7 +26,7 @@ public class ProdutoServico implements IProdutoServico {
 	public List<Catalogo> consultaCatalogo() {
 		logger.info(">>>>>> produto servico consulta catalogo iniciado");
 		Catalogo c = null;
-		List<Catalogo> lista = new ArrayList<Catalogo>();
+		List<Catalogo> lista = new ArrayList<>();
 		List<Produto> listaP = repositoryP.findAll();
 		List<Imagem> listaI = imagemServico.getAll();	
 		for (Produto p : listaP) {

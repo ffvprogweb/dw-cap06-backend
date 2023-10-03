@@ -1,4 +1,5 @@
 package com.fatec.produto.controller;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
@@ -31,8 +32,10 @@ public class APIProdutoController {
 	IProdutoServico produtoServico;
 	@Autowired
 	ImagemServico imagemServico;
+
 	/**
 	 * Consulta catalogo
+	 * 
 	 * @return - JSON Array com todos os produtos ou um JSON Array vazio
 	 */
 	@CrossOrigin // desabilita o cors do spring security
@@ -41,16 +44,22 @@ public class APIProdutoController {
 		logger.info(">>>>>> apicontroller consulta todos");
 		return ResponseEntity.status(HttpStatus.OK).body(produtoServico.consultaCatalogo());
 	}
+
 	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<Object> cadastraProduto(@RequestBody Produto p) {
 		logger.info(">>>>>> apicontroller cadastrar produto iniciado");
 		Optional<Produto> produto = produtoServico.cadastrar(p);
-		return ResponseEntity.status(HttpStatus.CREATED).body(produto.get());
+		if (produto.isPresent()) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(produto.get());
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 	}
+
 	@CrossOrigin // desabilita o cors do spring security
 	@PostMapping("/imadb")
-	public ResponseEntity<String> upload(@RequestParam (value = "file") MultipartFile file, @RequestParam String id) {
+	public ResponseEntity<String> upload(@RequestParam(value = "file") MultipartFile file, @RequestParam String id) {
 		logger.info(">>>>>> api upload iniciada...");
 		try {
 			logger.info(">>>>>> api manipula file upload chamou servico salvar");
@@ -76,6 +85,4 @@ public class APIProdutoController {
 		}
 	}
 
-
 }
-

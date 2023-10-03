@@ -10,8 +10,7 @@ public class Imagem {
     private String caminho;
     @Column(name = "arquivo", length = 28672)
     private byte[] arquivo;
-    public Imagem() {
-    }
+   
 	public Long getId() {
 		return id;
 	}

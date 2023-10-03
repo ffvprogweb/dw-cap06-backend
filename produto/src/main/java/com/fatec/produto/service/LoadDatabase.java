@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,11 +20,9 @@ import com.fatec.produto.model.Produto;
 @Configuration
 public class LoadDatabase {
 	Logger logger = LogManager.getLogger(this.getClass());
-	@Autowired
-	IImagemRepository imagemRepository;
-
+	
 	@Bean
-	CommandLineRunner initDatabase(IProdutoRepository repository) {
+	CommandLineRunner initDatabase(IProdutoRepository repository,IImagemRepository imagemRepository) {
 		return args -> {
 			Produto produto1 = new Produto("Eletrobomba 110V para Maquina de Lavar e Lava Louças", "maquina de lavar",
 					51.66, 12);
@@ -46,7 +43,6 @@ public class LoadDatabase {
 			imagem.setNome("produto1.jpg");
 			imagem.setCaminho("imagens/" + imagem.getNome());
 			imagem.setArquivo(arquivo1);
-			logger.info(">>>>> loaddatabase -> upload de arquivo imagem realizado  => " + arquivo1.length);
 			imagemRepository.save(imagem);
 			// ****************************************************************
 			path = Paths.get("c:/temp/produto2.jpg");
